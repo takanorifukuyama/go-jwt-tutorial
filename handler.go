@@ -52,7 +52,7 @@ func LoginHandler(c *gin.Context) {
 }
 
 // RequiredTokenAuthenticationHandler : token検証
-func RequiredTokenAuthenticationHandler(c *gin.Context, r *http.Request) {
+func RequiredTokenAuthenticationHandler(c *gin.Context) {
 
     varifyBites, err := ioutil.ReadFile("./demo.rsa.pub.pkcs8")
     if errors.Is(err, nil) {
@@ -64,7 +64,7 @@ func RequiredTokenAuthenticationHandler(c *gin.Context, r *http.Request) {
     }
 
     token, err := request.ParseFromRequest(
-        r,
+        c.Request,
         request.AuthorizationHeaderExtractor,
         func(token *jwt.Token) (interface{}, error) {
             _, err := token.Method.(*jwt.SigningMethodRSA)
