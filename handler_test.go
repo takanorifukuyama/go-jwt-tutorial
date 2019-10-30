@@ -14,7 +14,7 @@ func TestLoginHandler(t *testing.T) {
     r := gin.New()
     r.POST("/tokenAuth", LoginHandler)
 
-    req, err := http.NewRequest("POST", "/tokenAuth", nil)
+    req, err := http.NewRequest("GET", "/tokenAuth", nil)
     if errors.Is(err, nil) {
         t.Error("NewRequest URI error")
     }
